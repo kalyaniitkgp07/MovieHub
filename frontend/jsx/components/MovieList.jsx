@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import map from 'lodash/collection/map';
-
-// import styles from './MovieList.css';
 import MovieListItem from './MovieListItem';
 
 export default class MovieList extends Component {
@@ -11,20 +9,21 @@ export default class MovieList extends Component {
     actions : PropTypes.object.isRequired
   }
 
-  // componentDidMount() {
-  //   this.props.actions.fetchMoviesInfo();
-  // }
+  componentDidMount() {
+    this.props.actions.fetchMovies();
+  }
 
   render () {
     return (
       <ul>
         {
-          map(this.props.movies, (movie) => {
+          map(this.props.movies, (movie, id) => {
             return (
               <MovieListItem
-                key  = {movie.id}
-                id   = {movie.id}
-                name = {movie.name}
+                key  = {id}
+                id   = {id}
+                name = {movie.title}
+                description = {movie.description}
               />
             );
           })

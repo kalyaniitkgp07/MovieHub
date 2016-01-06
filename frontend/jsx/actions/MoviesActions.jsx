@@ -1,5 +1,6 @@
+import { createAction } from 'redux-actions';
 import * as types from '../constants/ActionTypes';
-import fetch from 'isomorphic-fetch';
+import callApi from '../utils/webUtils';
 
 export function addMovie(name) {  
   return {
@@ -15,38 +16,13 @@ export function deleteMovie(id) {
   };
 }
 
-// export function fetchMoviesInfo() {
-//   console.log('FETCH');
-//   return {
-//     type: 'FETCH_MOVIES_INFO',
-//     payload: {
-//       promise: fakeFetch(),
-//     }
-//   };
-// }
+export function fetchMovies() {
+  return {
+    promise: callApi('/moviesinfo'),
+    types: [types.FETCH_MOVIES_BEGIN, types.FETCH_MOVIES_SUCCESS, types.FETCH_MOVIES_ERROR],
+  }
+}
 
-// function fakeFetch() {
-//   return new Promise((resolve, reject) => {
-//     // if (!url) {
-//     //   reject(new Error('There is no URL provided for the request.'));
-//     // }
+export const successFetchMovies = createAction(types.FETCH_MOVIES_SUCCESS);
+export const errorFetchMovies = createAction(types.FETCH_MOVIES_ERROR);
 
-//     // if (!options) {
-//     //   reject(new Error('There are no options provided for the request.'));
-//     // }
-
-//     fetch('/moviesinfo').then(response => {
-//       return response.json();
-//     }).then(response => {
-//       console.log(response);
-//       // if (response.status >= 200 && response.status < 300) {
-//       //   return response.errors ? reject(response.errors) : reject(response);
-//       // } else {
-//       //   return resolve(response)
-//       // }
-//       return resolve(response);
-//     }).catch(error => {
-//       reject(error);
-//     });
-//   });
-// }

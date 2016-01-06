@@ -20,7 +20,7 @@ export default class MovieHub extends Component {
     return (
       <div>
         <h1>The MovieList</h1>
-        <AddMovieInput addMovie={actions.addMovie} />
+        {/*<AddMovieInput addMovie={actions.addMovie} />*/}
         <MovieList movies={moviesById} actions={actions} />
       </div>
     );

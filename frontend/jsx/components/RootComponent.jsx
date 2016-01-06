@@ -1,27 +1,23 @@
-import React, { Component } from 'react';  
-import { combineReducers, createStore, applyMiddleware } from 'redux';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
-// import promiseMiddleware from 'redux-promise-middleware';
-
 import MovieHub from './MovieHub';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import promiseMiddleware from '../utils/promiseMiddleware';
 import * as reducers from '../reducers';
-import {fetchMovies} from '../actions/WebAPIs';
 
-const reducer = combineReducers(reducers);
-// const store = createStore(reducer);
-const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
-const store = createStoreWithMiddleware(reducer);
-
-store.dispatch(fetchMovies()).then(() =>
-  console.log(store.getState())
-)
+const combinedReducer = combineReducers(reducers);
+const createStoreWithMiddleware = applyMiddleware(
+    thunkMiddleware,
+    promiseMiddleware
+  )(createStore);
+const appStore = createStoreWithMiddleware(combinedReducer);
 
 export default class RootComponent extends Component {  
   render() {
     return (
       <div>
-        <Provider store={store}>
+        <Provider store={appStore}>
           <MovieHub />
         </Provider>
       </div>
