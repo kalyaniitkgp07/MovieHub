@@ -43,6 +43,16 @@ export default function movies(state = initialState, action) {
         moviesById: omit(state.moviesById, action.id)
       }
 
+    case types.REQUEST_MOVIES:
+      return state;
+
+    case types.RECIEVE_MOVIES:
+      console.log(actions.movies);
+      return {
+        movies: [],
+        moviesById : {}
+      }
+
     default:
       return state;
   }
