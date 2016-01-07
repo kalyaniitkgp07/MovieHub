@@ -1,1 +1,1 @@
-from misc import foo
+from .validate import validateMovieArgs

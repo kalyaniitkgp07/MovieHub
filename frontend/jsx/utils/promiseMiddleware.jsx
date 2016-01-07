@@ -10,13 +10,25 @@ export default function promiseMiddleware() {
       }
 
       const [BEGIN, SUCCESS, FAILURE] = types;
+      let { API_BEGIN, API_SUCCESS, API_ERROR } = require('../constants/ActionTypes');
 
       next({ ...rest, type: BEGIN });
+      next({ ...rest, type: API_BEGIN });
 
-      return promise.then(
-        (response) => next({ ...rest, payload: response, type: SUCCESS }),
-        (error) => next({ ...rest, payload: error, type: FAILURE })
-      );
+      return promise
+        .then(res => {
+          next({ ...rest, payload: res, type: SUCCESS });
+          next({ ...rest, type: API_SUCCESS});
+          
+          return true;
+        })
+        .catch(error => {
+          next({ ...rest, payload: error, type: FAILURE });
+          next({ ...rest, type: API_ERROR});
+          
+          console.log(error);
+          return false;
+        });
     }
   }
 }

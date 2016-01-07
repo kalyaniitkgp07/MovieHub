@@ -1,6 +1,6 @@
 from .connection import dbConnection
 
-def getAllRoles():
+def getRolesInfo():
 	db = dbConnection()
 
 	getRolesQuery = 'SELECT * FROM Roles'

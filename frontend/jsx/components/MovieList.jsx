@@ -9,10 +9,6 @@ export default class MovieList extends Component {
     actions : PropTypes.object.isRequired
   }
 
-  componentDidMount() {
-    this.props.actions.fetchMovies();
-  }
-
   render () {
     return (
       <ul>

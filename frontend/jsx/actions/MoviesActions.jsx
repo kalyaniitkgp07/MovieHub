@@ -1,28 +1,22 @@
-import { createAction } from 'redux-actions';
 import * as types from '../constants/ActionTypes';
-import callApi from '../utils/webUtils';
-
-export function addMovie(name) {  
-  return {
-    type: types.ADD_MOVIE,
-    name
-  };
-}
-
-export function deleteMovie(id) {  
-  return {
-    type: types.DELETE_MOVIE,
-    id
-  };
-}
+import * as WebUtils from '../utils/webUtils';
+import { WebAPIs } from '../constants/WebAPIs';
 
 export function fetchMovies() {
+  const url = WebAPIs.MOVIES_INFO;
   return {
-    promise: callApi('/moviesinfo'),
+    promise: WebUtils.callApi(url),
     types: [types.FETCH_MOVIES_BEGIN, types.FETCH_MOVIES_SUCCESS, types.FETCH_MOVIES_ERROR],
+    url,
   }
 }
 
-export const successFetchMovies = createAction(types.FETCH_MOVIES_SUCCESS);
-export const errorFetchMovies = createAction(types.FETCH_MOVIES_ERROR);
-
+export function fetchMovieDetails(movieId) {
+  const url = WebAPIs.MOVIE_DETAILS(movieId);
+  return {
+    payload: movieId,
+    promise: WebUtils.callApi(url),
+    types: [types.FETCH_MOVIE_DETAILS_BEGIN, types.FETCH_MOVIE_DETAILS_SUCCESS, types.FETCH_MOVIE_DETAILS_ERROR],
+    url,
+  }
+}

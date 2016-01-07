@@ -4,19 +4,17 @@ import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
 import Header from './Header';
 
-function Template({ pushPath, children }) {
-  return (
-    <div>
-      <Header />
+@connect(null, {pushPath})
+export default class Template extends React.Component {
+  render() {
+    return (
       <div>
-        <button onClick={() => pushPath('/movies')}>Go to /movies</button>
-      </div>
-      <div>{children}</div>
-    </div>
-  );
-};
-
-module.exports = connect(
-  null,
-  { pushPath }
-)(Template);
+       <Header />
+       <div>
+         <button onClick={() => this.props.pushPath('/movies')}>Go to /movies</button>
+       </div>
+       <div>{this.props.children}</div>
+     </div>
+    );
+  }
+}

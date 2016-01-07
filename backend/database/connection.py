@@ -1,6 +1,5 @@
 import torndb
 from config import DB_CREDENTIAL
-from utils import foo
 
 def dbConnection():
 	return torndb.Connection(
