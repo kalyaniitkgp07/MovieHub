@@ -19,7 +19,16 @@ def insertRoles():
     # this function should be called once only, as these are fixed values
     roles = [
         ('ACCOUNTANT', 'Accountant'),
+        ('ACTOR', 'Actor'),
+        ('ART_DIRECTOR', 'Art Director'),
+        ('DIRECTOR', 'Director'),
+        ('EDITOR', 'Editor'),
         ('LEGAL_COUNSEL', 'Legal counsel'),
+        ('LOCATION_MANAGER', 'Location Manager'),
+        ('MUSIC_DIRECTOR', 'Music Director'),
+        ('PRODUCER', 'Producer'),
+        ('PRODUCTION_DESIGNER', 'Production Designer'),
+        ('WRITER', 'Writer'),
     ]
     queryStr = 'INSERT INTO Roles(roleId, name) VALUES(%s, %s)'
     db = dbConnection()
