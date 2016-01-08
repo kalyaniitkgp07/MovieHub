@@ -10,3 +10,7 @@ export {
 export {
   fetchRoles,
 } from './RolesActions';
+
+export {
+  addMovie,
+} from './AddMovieActions';

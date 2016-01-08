@@ -10,10 +10,9 @@ export default class Template extends React.Component {
     return (
       <div>
        <Header />
-       <div>
-         <button onClick={() => this.props.pushPath('/movies')}>Go to /movies</button>
-       </div>
-       <div>{this.props.children}</div>
+       <div className="col-lg-8 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-2">
+          {this.props.children}
+        </div>
      </div>
     );
   }

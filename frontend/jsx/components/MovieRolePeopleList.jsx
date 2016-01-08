@@ -6,7 +6,7 @@ export default class MovieRoleList extends React.Component {
   render() {
     const { rolePeopleIdList, people } = this.props;
     return (
-      <ul>
+      <ul className="list-group">
         {
           map(rolePeopleIdList, (peopleId) => {
             return (

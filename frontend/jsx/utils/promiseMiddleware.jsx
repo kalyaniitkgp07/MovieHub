@@ -1,4 +1,4 @@
-export default function promiseMiddleware() {
+export default function promiseMiddleware(store) {
 
   return (next) => {
     return (action) => {
@@ -11,6 +11,10 @@ export default function promiseMiddleware() {
 
       const [BEGIN, SUCCESS, FAILURE] = types;
       let { API_BEGIN, API_SUCCESS, API_ERROR } = require('../constants/ActionTypes');
+
+      if(!action.url) {
+        return Promise.reject(new Error('URL required for the request.'));
+      }
 
       next({ ...rest, type: BEGIN });
       next({ ...rest, type: API_BEGIN });

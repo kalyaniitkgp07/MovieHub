@@ -1,0 +1,14 @@
+.movies-page-wrapper {
+  .movie-list {
+    .movie-list-item {
+      margin-top: 0;
+      .movie-list-item-heading {
+        @include oneline-truncate;
+        font-style: italic;
+      }
+      .movie-list-item-body {
+        @include mulitline-truncate;
+      }
+    }
+  }
+}

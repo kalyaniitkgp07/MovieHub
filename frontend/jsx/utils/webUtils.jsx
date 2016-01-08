@@ -1,19 +1,22 @@
 import fetch from 'isomorphic-fetch';
+import assign from 'lodash/object/assign';
 
 export function callApi(url, options) {
   return new Promise((resolve, reject) => {
     if (!url) {
       reject(new Error('There is no URL provided for the request.'));
     }
-
-    // if (!options) {
-    //   reject(new Error('There are no options provided for the request.'));
-    // }
+    const defaultOptions = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    };
+    options = assign({}, defaultOptions, options);
 
     fetch(url, options).then(response => {
       return response.json();
     }).then(response => {
-      console.log(response);
       if (!response.status) {
         return reject(response.error);
       } else {
@@ -27,9 +30,9 @@ export function callApi(url, options) {
 
 export const LOADING_STATUS = {
   NOT_REQUESTED : 'NOT_REQUESTED',
-  LOADING : 'LOADING',
-  SUCCESS : 'SUCCESS',
-  ERROR : 'ERROR',
+  LOADING       : 'LOADING',
+  SUCCESS       : 'SUCCESS',
+  ERROR         : 'ERROR',
 }
 
 export const API_RESPONSE = {

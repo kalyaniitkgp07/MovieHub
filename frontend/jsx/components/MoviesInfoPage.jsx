@@ -21,11 +21,10 @@ export default class MoviesInfoPage extends Component {
   }
 
   render () {
-    console.log('PORPS:::', this.props);
     const { movielist: { moviesById }, actions } = this.props;
 
     return (
-      <div>
+      <div className="movies-page-wrapper">
         <MovieList movies={moviesById} actions={actions} />
       </div>
     );

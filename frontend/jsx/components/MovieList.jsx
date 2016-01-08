@@ -11,20 +11,18 @@ export default class MovieList extends Component {
 
   render () {
     return (
-      <ul>
+      <div className="panel-group movie-list">
         {
           map(this.props.movies, (movie, id) => {
             return (
               <MovieListItem
-                key  = {id}
-                id   = {id}
-                name = {movie.title}
-                description = {movie.description}
+                key   = {id}
+                movie = {movie}
               />
             );
           })
         }
-      </ul>
+      </div>
     );
   }
 
